@@ -1,0 +1,57 @@
+---
+- name: Add apt key for Kodi
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 5243CDED
+  tags: kodi
+
+- name: Add Kodi repo
+  apt_repository:
+    repo: 'deb http://archive.mene.za.net/raspbian jessie contrib'
+    state: present
+    update_cache: yes
+  tags: kodi
+
+- name: Install Kodi
+  apt:
+    name: kodi
+    state: present
+  tags: kodi
+
+- name: Create user group for audio
+  group:
+    name: audio
+    system: yes
+    state: present
+  tags: kodi
+
+- name: Add kodi user to required groups
+  user:
+    name: kodi
+    shell: /bin/bash
+    groups: "audio,video,input,dialout,plugdev,tty"
+    append: yes
+  tags: kodi
+
+- name: Create udev rules
+  template:
+    src: 99-input.rules.j2
+    dest: /etc/udev/rules.d/
+    owner: root
+    group: root
+    mode: 0644
+  tags: kodi
+
+- name: Enable Kodi
+  lineinfile:
+    dest: /etc/default/kodi
+    regexp: ^ENABLED=
+    line: ENABLED=1
+  tags: kodi
+
+- name: Increase GPU memory
+  lineinfile:
+    dest: /boot/config.txt
+    regexp: ^gpu_mem=
+    line: gpu_mem=128
+  tags: kodi

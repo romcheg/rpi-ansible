@@ -2,20 +2,22 @@
  - name: Install rpi
    hosts: rpi
    become: true
-   become_user: root
-   become_method: sudo
+   vars:
+     storage: /media/storage/
+     downloads: "{{ storage }}downloads"
+     music: "{{ storage }}music"
+     movies: "{{ storage }}movies"
+     pictures: "{{ storage }}pictures"
+     series: "{{ storage }}series"
    roles:
      - role: elboletaire.transmission
-       sudo: yes
-       transmission_user: romcheg
-       transmission_password: romcheg_bt_pwd
-       transmission_rpc_auth_required: true
+       become: true
+       transmission_password: "bt_passwd"
+       transmission_rpc_auth_enabled: true
        transmission_rpc_whitelist_enabled: false
-   tasks:
-     - name: create user group
-       group: name=storageadmin state=present
-     - include: secrets.yml
-     - name: create a mount point for the hdd
-       file: path=/media/storage state=directory
-     - name: add the external hdd to fstab
-       mount: name=/media/storage src=/dev/disk/by-label/Storage fstype=xfs opts=rw,relatime,attr2,inode64,noquota state=mounted
+       transmission_download_dir: "{{ downloads }}"
+       transmission_watch_dir_enabled: false
+       transmission_watch_dir: "{{ downloads }}"
+       transmission_rpc_auth_required: false
+     - role: kodi
+       decome: true
