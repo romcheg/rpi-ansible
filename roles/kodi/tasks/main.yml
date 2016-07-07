@@ -29,7 +29,7 @@
   user:
     name: kodi
     shell: /bin/bash
-    groups: "audio,video,input,dialout,plugdev,tty"
+    groups: "audio,video,input,dialout,plugdev,tty,{{ storage_group }}"
     append: yes
   tags: kodi
 

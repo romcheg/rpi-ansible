@@ -1,0 +1,23 @@
+---
+- name: Grant permissions for downloads directory
+  file:
+    path: {{ downloads }}
+    owner: debian-transmission
+    group: "{{ storage_group }}"
+    mode: "ug+rw"
+    recurse: yes
+    state: directory
+
+- name: Grant permissions for music directory
+  file:
+    path: "{{ item }}"
+    owner: kodi
+    group: "{{ storage_group }}"
+    mode: "ug+rw"
+    recurse: yes
+    state: directory
+  with_items:
+    - "{{ music }}"
+    - "{{ movies }}"
+    - "{{ photos }}"
+    - "{{ series }}"

@@ -1,23 +1,17 @@
 ---
- - name: Install rpi
-   hosts: rpi
-   become: true
-   vars:
-     storage: /media/storage/
-     downloads: "{{ storage }}downloads"
-     music: "{{ storage }}music"
-     movies: "{{ storage }}movies"
-     pictures: "{{ storage }}pictures"
-     series: "{{ storage }}series"
-   roles:
-     - role: elboletaire.transmission
-       become: true
-       transmission_password: "bt_passwd"
-       transmission_rpc_auth_enabled: true
-       transmission_rpc_whitelist_enabled: false
-       transmission_download_dir: "{{ downloads }}"
-       transmission_watch_dir_enabled: false
-       transmission_watch_dir: "{{ downloads }}"
-       transmission_rpc_auth_required: false
-     - role: kodi
-       decome: true
+- name: Install rpi
+  hosts: rpi
+  become: true
+  roles:
+    - role: elboletaire.transmission
+      become: true
+      transmission_password: "bt_passwd"
+      transmission_rpc_auth_enabled: true
+      transmission_rpc_whitelist_enabled: false
+      transmission_download_dir: "{{ downloads }}"
+      transmission_watch_dir_enabled: false
+      transmission_watch_dir: "{{ downloads }}"
+      transmission_rpc_auth_required: false
+    - role: kodi
+      become: true
+      storage_group: "{{ storage_group }}"

@@ -1,0 +1,10 @@
+---
+- name: Generate EN locale
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Generate UK locale
+  locale_gen:
+    name: uk_UA.UTF-8
+    state: present

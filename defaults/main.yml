@@ -1,0 +1,7 @@
+storage: /media/storage/
+downloads: "{{ storage }}downloads"
+music: "{{ storage }}music"
+movies: "{{ storage }}movies"
+pictures: "{{ storage }}pictures"
+series: "{{ storage }}series"
+storage_group: storageadmin

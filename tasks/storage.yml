@@ -1,0 +1,13 @@
+---
+- name: Create a mount point for the hdd
+  file:
+    path: /media/storage
+    state: directory
+
+- name: Add the external hdd to fstab
+  mount:
+    name: /media/storage
+    src: /dev/disk/by-label/Storage
+    fstype: xfs
+    opts: "rw,relatime,attr2,inode64,noquota"
+    state: mounted
