@@ -5,7 +5,7 @@
   roles:
     - role: elboletaire.transmission
       become: true
-      transmission_password: "bt_passwd"
+      transmission_password: "{{ bt_passwd }}"
       transmission_rpc_auth_enabled: true
       transmission_rpc_whitelist_enabled: false
       transmission_download_dir: "{{ downloads }}"
