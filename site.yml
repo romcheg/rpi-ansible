@@ -2,16 +2,19 @@
 - name: Install rpi
   hosts: rpi
   become: true
+  vars_files:
+    - defaults/main.yml
+    - defaults/secret.yml
   roles:
     - role: elboletaire.transmission
       become: true
-      transmission_password: "{{ bt_passwd }}"
+      transmission_password: "{{ rpi_bt_passwd }}"
       transmission_rpc_auth_enabled: true
       transmission_rpc_whitelist_enabled: false
-      transmission_download_dir: "{{ downloads }}"
+      transmission_download_dir: "{{ rpi_downloads }}"
       transmission_watch_dir_enabled: false
-      transmission_watch_dir: "{{ downloads }}"
+      transmission_watch_dir: "{{ rpi_downloads }}"
       transmission_rpc_auth_required: false
     - role: kodi
       become: true
-      storage_group: "{{ storage_group }}"
+      kodi_storage_group: "{{ rpi_storage_group }}"

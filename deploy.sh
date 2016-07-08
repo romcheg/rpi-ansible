@@ -1,5 +1,5 @@
 #! /bin/bash
 
-set +eux
-ansible-playbook --ask-vault-pass -i inventory -e defaults/mail.yml -e defaults/secret.yml
+set -euxx
+ansible-playbook --ask-vault-pass -i inventory -C --diff site.yml
 

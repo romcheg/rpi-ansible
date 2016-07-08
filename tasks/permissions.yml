@@ -1,9 +1,9 @@
 ---
 - name: Grant permissions for downloads directory
   file:
-    path: {{ downloads }}
+    path: "{{ rpi_downloads }}"
     owner: debian-transmission
-    group: "{{ storage_group }}"
+    group: "{{ rpi_storage_group }}"
     mode: "ug+rw"
     recurse: yes
     state: directory
@@ -12,12 +12,12 @@
   file:
     path: "{{ item }}"
     owner: kodi
-    group: "{{ storage_group }}"
+    group: "{{ rpi_storage_group }}"
     mode: "ug+rw"
     recurse: yes
     state: directory
   with_items:
-    - "{{ music }}"
-    - "{{ movies }}"
-    - "{{ photos }}"
-    - "{{ series }}"
+    - "{{ rpi_music }}"
+    - "{{ rpi_movies }}"
+    - "{{ rpi_photos }}"
+    - "{{ rpi_series }}"

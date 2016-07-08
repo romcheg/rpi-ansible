@@ -1,7 +1,7 @@
-storage: /media/storage/
-downloads: "{{ storage }}downloads"
-music: "{{ storage }}music"
-movies: "{{ storage }}movies"
-pictures: "{{ storage }}pictures"
-series: "{{ storage }}series"
-storage_group: storageadmin
+rpi_storage: /media/storage/
+rpi_downloads: "{{ rpi_storage }}downloads"
+rpi_music: "{{ rpi_storage }}music"
+rpi_movies: "{{ rpi_storage }}movies"
+rpi_pictures: "{{ rpi_storage }}pictures"
+rpi_series: "{{ rpi_storage }}series"
+rpi_storage_group: storageadmin
