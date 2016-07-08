@@ -4,13 +4,6 @@
     name: "{{ rpi_storage_group }}"
     state: present
 
-  # - name: Add kodi user
-  #   user:
-  #     name: kodi
-  #     shell: /bin/bash
-  #     groups: "storageadmin,root"
-  #     append: yes
-  #     password: "$6$rounds=656000$zsHZAd0Mli9LoAiO$ny6Fs.VIT5PxqFL4ZDwP2L8tua7zKzYgbB2w8RYY93QsB9XAE1Y4etktTh.IqZKqlDzWyleQfUQ7lUuH/kpyx0"
 - name: Add romcheg user
   user:
     name: romcheg
@@ -18,3 +11,4 @@
     groups: "{{ rpi_storage_group }},root"
     append: yes
     password: "{{ rpi_romcheg_password }}"
+    state: present

@@ -8,7 +8,7 @@
     recurse: yes
     state: directory
 
-- name: Grant permissions for music directory
+- name: Grant permissions for other storage directories
   file:
     path: "{{ item }}"
     owner: kodi
