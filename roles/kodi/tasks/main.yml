@@ -3,13 +3,14 @@
   apt_key:
     keyserver: keyserver.ubuntu.com
     id: 5243CDED
+    state: present
   tags: kodi
 
 - name: Add Kodi repo
   apt_repository:
     repo: 'deb http://archive.mene.za.net/raspbian jessie contrib'
-    state: present
     update_cache: yes
+    state: present
   tags: kodi
 
 - name: Install Kodi
@@ -31,6 +32,7 @@
     shell: /bin/bash
     groups: "audio,video,input,dialout,plugdev,tty,{{ kodi_storage_group }}"
     append: yes
+    state: present
   tags: kodi
 
 - name: Create udev rules
@@ -47,6 +49,7 @@
     dest: /etc/default/kodi
     regexp: ^ENABLED=
     line: ENABLED=1
+    state: present
   tags: kodi
 
 - name: Increase GPU memory
@@ -54,4 +57,5 @@
     dest: /boot/config.txt
     regexp: ^gpu_mem=
     line: gpu_mem=128
+    state: present
   tags: kodi
