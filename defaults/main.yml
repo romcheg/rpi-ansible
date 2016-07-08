@@ -5,3 +5,5 @@ rpi_movies: "{{ rpi_storage }}movies"
 rpi_pictures: "{{ rpi_storage }}pictures"
 rpi_series: "{{ rpi_storage }}series"
 rpi_storage_group: storageadmin
+rpi_sudo_group: sudo
+rpi_public_key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

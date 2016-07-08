@@ -8,7 +8,14 @@
   user:
     name: romcheg
     shell: /bin/bash
-    groups: "{{ rpi_storage_group }},root"
+    groups: "{{ rpi_storage_group }},{{ rpi_sudo_group }}"
     append: yes
     password: "{{ rpi_romcheg_password }}"
     state: present
+
+- name: Add local public key to authorized_keys
+  authorized_key:
+    user: "{{ item }}"
+    key: "{{ rpi_public_key }}"
+  with_items:
+    - romcheg
