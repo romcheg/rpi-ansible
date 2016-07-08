@@ -14,7 +14,7 @@
       transmission_download_dir: "{{ rpi_downloads }}"
       transmission_watch_dir_enabled: false
       transmission_watch_dir: "{{ rpi_downloads }}"
-      transmission_rpc_auth_required: false
+      transmission_rpc_auth_required: true
     - role: kodi
       become: true
       kodi_storage_group: "{{ rpi_storage_group }}"
