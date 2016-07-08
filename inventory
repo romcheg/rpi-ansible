@@ -1,2 +1,2 @@
 [rpi]
-10.0.1.8 ansible_user=pi ansible_ssh_pass=raspberry
+rpi.local ansible_ssh_host=10.0.1.8 ansible_user=pi ansible_ssh_pass=raspberry

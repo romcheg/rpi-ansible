@@ -8,6 +8,7 @@
   tasks:
     - include: tasks/main.yml
   roles:
+    - role: ANXS.hostname
     - role: elboletaire.transmission
       become: true
       transmission_password: "{{ rpi_bt_passwd }}"
