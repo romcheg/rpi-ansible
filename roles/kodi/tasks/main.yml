@@ -19,18 +19,26 @@
     state: present
   tags: kodi
 
-- name: Create user group for audio
+- name: Create user groups
   group:
-    name: audio
+    name: "{{ item }}"
     system: yes
     state: present
+  with_items:
+    - "{{ kodi_audio_group }}"
+    - "{{ kodi_video_group }}"
+    - "{{ kodi_input_group }}"
+    - "{{ kodi_dialout_group }}"
+    - "{{ kodi_plugdev_group }}"
+    - "{{ kodi_tty_group }}"
+    - "{{ kodi_storage_group }}"
   tags: kodi
 
 - name: Add kodi user to required groups
   user:
     name: kodi
     shell: /bin/bash
-    groups: "audio,video,input,dialout,plugdev,tty,{{ kodi_storage_group }}"
+    groups: "{{ kodi_audio_group }},{{ kodi_video_group }},{{ kodi_input_group }},{{ kodi_dialout_group }},{{ kodi_plugdev_group }},{{ kodi_tty_group }},{{ kodi_storage_group }}"
     append: yes
     state: present
   tags: kodi

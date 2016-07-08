@@ -1,2 +1,2 @@
-SUBSYSTEM=="input", GROUP="input", MODE="0660"
-KERNEL=="tty[0-9]*", GROUP="tty", MODE="0660"
+SUBSYSTEM=="input", GROUP="{{ kodi_input_group }}", MODE="0660"
+KERNEL=="tty[0-9]*", GROUP="{{ kodi_tty_group }}", MODE="0660"

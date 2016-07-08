@@ -1,1 +1,7 @@
-kodi_storage_group: "storageadmin"
+kodi_storage_group: "storage"
+kodi_audio_group: audio
+kodi_video_group: video
+kodi_input_group: input
+kodi_dialout_group: dialout
+kodi_plugdev_group: plugdev
+kodi_tty_group: tty
