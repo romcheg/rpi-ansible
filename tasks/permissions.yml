@@ -19,5 +19,5 @@
   with_items:
     - "{{ rpi_music }}"
     - "{{ rpi_movies }}"
-    - "{{ rpi_photos }}"
+    - "{{ rpi_pictures }}"
     - "{{ rpi_series }}"

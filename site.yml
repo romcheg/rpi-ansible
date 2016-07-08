@@ -5,6 +5,8 @@
   vars_files:
     - defaults/main.yml
     - defaults/secret.yml
+  tasks:
+    - include: tasks/main.yml
   roles:
     - role: elboletaire.transmission
       become: true
