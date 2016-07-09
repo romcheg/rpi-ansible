@@ -21,3 +21,16 @@
     - role: kodi
       become: true
       kodi_storage_group: "{{ rpi_storage_group }}"
+    - role: openvpnclient
+      openvpn_remote_host: 'vpn.romcheg.me'
+      openvpn_remote_port: 1195
+      openvpn_dev: tap
+      openvpn_keepalive: "10 3600"
+      openvpn_ca_certificate: "{{ rpi_ovpn_ca_cert }}"
+      openvpn_client_certificate: "{{ rpi_ovpn_client_cert }}"
+      openvpn_client_key : "{{ rpi_ovpn_client_key }}"
+      openvpn_client_pull: true
+      openvpn_redirect_gateway: true
+      openvpn_persist_key: true
+      openvpn_persist_tun: true
+      openvpn_comp_lzo: true

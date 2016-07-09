@@ -1,0 +1,7 @@
+---
+# vars file for openvpn
+
+openvpn_package: openvpn
+openvpn_service_name: openvpn
+openvpn_user: nobody
+openvpn_group: nogroup

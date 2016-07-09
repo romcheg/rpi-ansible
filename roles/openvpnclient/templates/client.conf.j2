@@ -1,0 +1,42 @@
+# {{ ansible_managed }}
+
+remote {{ openvpn_remote_host }} {{ openvpn_remote_port }} {{ openvpn_proto }}
+{% if openvpn_persist_key %}
+persist-key
+{% endif %}
+tls-client
+{% if openvpn_client_pull %}
+pull
+{% endif %}
+dev {{  openvpn_dev }}
+{% if openvpn_persist_tun %}
+persist-tun
+{% endif %}
+
+sndbuf 0
+rcvbuf 0
+
+{% if openvpn_comp_lzo %}
+comp-lzo yes
+{% else %}
+comp-lzo no
+{% endif %}
+{% if openvpn_nobind %}
+nobind
+{% endif %}
+
+{% if openvpn_ca_certificate %}
+<ca>
+{{ openvpn_ca_certificate }}
+</ca>
+{% endif %}
+{% if openvpn_client_certificate %}
+<cert>
+{{ openvpn_client_certificate }}
+</cert>
+{% endif %}
+{% if openvpn_client_key %}
+<key>
+{{ openvpn_client_key }}
+</key>
+{% endif %}
