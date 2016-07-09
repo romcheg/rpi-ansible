@@ -5,3 +5,7 @@ kodi_input_group: input
 kodi_dialout_group: dialout
 kodi_plugdev_group: plugdev
 kodi_tty_group: tty
+kodi_movies: ""
+kodi_music: ""
+kodi_pictures: ""
+kodi_series: ""

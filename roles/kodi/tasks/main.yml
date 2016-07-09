@@ -67,3 +67,32 @@
     line: gpu_mem=128
     state: present
   tags: kodi
+
+- name: Create Kodi userdata directory
+  file:
+    path: /home/kodi/.kodi/userdata/
+    owner: kodi
+    state: directory
+  tags: kodi
+
+- name: Add Kodi sources
+  template:
+    src: sources.xml.j2
+    dest: /home/kodi/.kodi/userdata/sources.xml
+    owner: kodi
+    mode: 0644
+  become: true
+  become_user: kodi
+  tags: kodi
+
+- name: Add Kodi GUI settings
+  become: true
+  become_user: kodi
+  template:
+    src: guisettings.xml.j2
+    dest: /home/kodi/.kodi/userdata/guisettings.xml
+    owner: kodi
+    mode: 0644
+  become: true
+  become_user: kodi
+  tags: kodi

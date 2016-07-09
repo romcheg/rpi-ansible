@@ -21,6 +21,10 @@
     - role: kodi
       become: true
       kodi_storage_group: "{{ rpi_storage_group }}"
+      kodi_movies: "{{ rpi_movies }}" 
+      kodi_music: "{{ rpi_series }}"
+      kodi_pictures: "{{ rpi_pictures }}"
+      kodi_series: "{{ rpi_downloads }}"
     - role: openvpnclient
       openvpn_remote_host: 'vpn.romcheg.me'
       openvpn_remote_port: 1195
