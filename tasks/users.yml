@@ -7,7 +7,7 @@
 - name: Add romcheg user
   user:
     name: romcheg
-    shell: /bin/bash
+    shell: /usr/bin/zsh
     groups: "{{ rpi_storage_group }},{{ rpi_sudo_group }}"
     append: yes
     password: "{{ rpi_romcheg_password }}"
@@ -19,3 +19,8 @@
     key: "{{ rpi_public_key }}"
   with_items:
     - romcheg
+
+- name: Install oh-my-zsh for romcheg
+  become: true
+  become_user: romcheg
+  shell: curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed -e '83,96d' | bash
