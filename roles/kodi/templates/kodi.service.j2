@@ -1,0 +1,14 @@
+[Unit]
+Description = kodi-standalone using xinit
+After = remote-fs.target
+ 
+[Service]
+User = {{ kodi_user_name }}
+Group = {{ kodi_storage_group }}
+PAMName = login
+Type = simple
+ExecStart = /usr/bin/xinit /usr/bin/dbus-launch /usr/bin/kodi-standalone -- :0 -nolisten tcp
+Restart = on-abort
+ 
+[Install]
+WantedBy = multi-user.target

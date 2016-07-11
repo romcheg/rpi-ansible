@@ -25,6 +25,8 @@
       kodi_music: "{{ rpi_series }}"
       kodi_pictures: "{{ rpi_pictures }}"
       kodi_series: "{{ rpi_downloads }}"
+      kodi_user_name: "kodi"
+      kodi_user_password: "{{rpi_kodi_user_password}}"
     - role: openvpnclient
       openvpn_remote_host: 'vpn.romcheg.me'
       openvpn_remote_port: 1195

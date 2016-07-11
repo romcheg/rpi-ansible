@@ -13,10 +13,14 @@
     state: present
   tags: kodi
 
-- name: Install Kodi
+- name: Install required packages
   apt:
-    name: kodi
+    name: "{{ item }}"
     state: present
+  with_items:
+    - dbus-x11
+    - kodi
+    - xinit
   tags: kodi
 
 - name: Create user groups
@@ -36,8 +40,8 @@
 
 - name: Add kodi user to required groups
   user:
-    name: kodi
-    shell: /bin/bash
+    name: "{{ kodi_user_name }}"
+    shell: "/bin/false"
     groups: "{{ kodi_audio_group }},{{ kodi_video_group }},{{ kodi_input_group }},{{ kodi_dialout_group }},{{ kodi_plugdev_group }},{{ kodi_tty_group }},{{ kodi_storage_group }}"
     append: yes
     state: present
@@ -52,7 +56,7 @@
     mode: 0644
   tags: kodi
 
-- name: Enable Kodi
+- name: Disable Kodi in its old script
   lineinfile:
     dest: /etc/default/kodi
     regexp: ^ENABLED=
@@ -68,10 +72,36 @@
     state: present
   tags: kodi
 
+- name: Add Kodi service
+  template:
+    src: kodi.service.j2
+    dest: /etc/systemd/system/kodi.service
+    mode: "0655"
+  tags: kodi
+
+- name: Reload system.d daemons
+  shell: systemctl daemon-reload
+  tags: kodi
+
+- name: Allow Kodi to manage power
+  template:
+    src: kodi_shutdown.pkla.j2
+    dest: /etc/polkit-1/localauthority/50-local.d/kodi_shutdown.pkla
+    mode: "0644"
+  tags: kodi
+
+- name: Allow X to start from a non-console script
+  lineinfile:
+    dest: /etc/X11/Xwrapper.config
+    regexp: ^allowed_users=
+    line: allowed_users=anybody
+    state: present
+  tags: kodi
+
 - name: Create Kodi userdata directory
   file:
     path: /home/kodi/.kodi/userdata/
-    owner: kodi
+    owner: "{{ kodi_user_name }}"
     state: directory
   tags: kodi
 
@@ -79,20 +109,27 @@
   template:
     src: sources.xml.j2
     dest: /home/kodi/.kodi/userdata/sources.xml
-    owner: kodi
+    owner: "{{ kodi_user_name }}"
     mode: 0644
   become: true
-  become_user: kodi
+  become_user: "{{ kodi_user_name }}"
   tags: kodi
 
 - name: Add Kodi GUI settings
   become: true
-  become_user: kodi
+  become_user: "{{ kodi_user_name }}"
   template:
     src: guisettings.xml.j2
     dest: /home/kodi/.kodi/userdata/guisettings.xml
-    owner: kodi
+    owner: "{{ kodi_user_name }}"
     mode: 0644
   become: true
-  become_user: kodi
+  become_user: "{{ kodi_user_name }}"
+  tags: kodi
+
+- name: Ensure Kodi is started and enabled
+  service:
+    name: kodi
+    enabled: yes
+    state: started
   tags: kodi
